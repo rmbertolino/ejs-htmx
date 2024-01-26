@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello EJS + HTMX</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <h1>EJS + HTMX</h1>
+    <button hx-post="/clicked" hx-swap="outerHTML">
+        Click Me
+    </button>
+
+    <div
+        hx-get="http://localhost:3000/products"
+        hx-trigger="click">
+        Click here
+    </div>
+    <div>
+        <h2>Add a product</h2>
+        <form
+            hx-post="http://localhost:3000/products"
+            hx-swap="none">
+            <input type="text" name="productname" placeholder="Product Name"><br>
+            <input type="submit" value="add product">
+        </form>
+    </div>
+    <div>
+        <h2>Search</h2>
+        <input
+            type="search"
+            name="productname"
+            placeholder="type a product name"
+            hx-get="http://localhost:3000/products"
+            hx-trigger="keyup changed delay:700ms, search"
+            hx-target="#search-results"
+        >
+        <div id="search-results"></div>
+    </div>
+</body>
+</html>
